@@ -29,7 +29,4 @@ jobs:
       - run: npm install
       - run: node index.js
       - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_message: Update result data
+        run: git add -A && git commit -am "update data" && git push ${{ secrets.TOKEN }}
