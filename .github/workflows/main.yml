@@ -30,6 +30,7 @@ jobs:
       - run: node index.js
       - name: Commit report
         run: |
+          git add -A
           git config --global user.name 'ShaokangJiang'
           git config --global user.email 'shj002@ucsd.edu'
           git commit -am "update Data"
