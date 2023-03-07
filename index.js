@@ -84,9 +84,15 @@ async function mainFunction1(name) {
                 let lists = i.getElementsByTagName("td");
                 let tempStr = lists[1].innerText.split("\n");
                 //name,price,sample,valuable,bench,bench_low,bench_high
-                if (tempStr[1].indexOf("$") == -1)
+                if (lists[lists.length - 1].innerText.trim().length == 0)
                     return toRe;
-                toRe += tempStr[1].substring(0, tempStr[1].indexOf("$")).trim() + "," + tempStr[1].substring(tempStr[1].indexOf("$") + 1, tempStr[1].length).trim().replace(",", "") + "," + handleNumber(tempStr[2].replace("Samples", "").trim()) + "," + lists[3].innerText.split("\n")[0].trim();
+
+                if (tempStr[1].indexOf("$") == -1) {
+                    toRe += tempStr[1].trim()
+                } else {
+                    toRe += tempStr[1].substring(0, tempStr[1].indexOf("$")).trim()
+                }
+                toRe += "," + lists[lists.length - 1].innerText.split("\n")[0].replace("$", "").trim().replace(",", "") + "," + handleNumber(tempStr[2].replace("Samples", "").trim()) + "," + lists[3].innerText.split("\n")[0].trim();
                 tempStr = lists[4].innerText.split("\n");
                 toRe += "," + tempStr[0] + "," + tempStr[1].split("-")[0].trim() + "," + tempStr[1].split("-")[1].trim() + "\n";
             }
