@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   schedule: # Run workflow automatically
-    - cron: '* * 3 * *' # Runs every hour, on the hour
+    - cron: '15 23 * * 3' # Runs every hour, on the hour
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,3 +28,8 @@ jobs:
         run: sudo apt-get install ttf-wqy-microhei ttf-wqy-zenhei chromium-browser chromium-browser-l10n fonts-droid-fallback
       - run: npm install
       - run: node index.js
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: Update result data
