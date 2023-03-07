@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   schedule: # Run workflow automatically
-    - cron: '15 23 */2 * 3' # Runs every hour, on the hour
+    - cron: '15 23 */3 * *' # Runs every hour, on the hour
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -34,4 +34,4 @@ jobs:
           git config --global user.name 'ShaokangJiang'
           git config --global user.email 'shj002@ucsd.edu'
           git commit -am "update Data"
-          git push
+          git push ${{ secrets.TOKEN }}
